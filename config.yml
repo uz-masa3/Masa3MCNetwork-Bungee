@@ -1,0 +1,13 @@
+message:
+  CONNECT: "&b[Connect]: &a%player%&7さんが参加しました。"
+  DISCONNECT: "&b[Connect]: &a%player%&7さんが退出しました。"
+  SWITCH: "&b[Switch]: &a%server%サーバー&7に移動しました。"
+  MOTD_OK: "&6Masa3MCNetwork &b| &224時間あいてます\n&eMinigames, Creative, Survival, PvP..."
+  MOTD_BAD: "&6Masa3MCNetwork &b| &224時間あいてます!\n&ePlay.masa3MCNetwork.comでお入りください"
+
+mysql:
+  host: localhost
+  port: 3306
+  database: jecon_
+  username: masa3mcnetwork
+  password: Masa3MC_45779172_Masa3MC
