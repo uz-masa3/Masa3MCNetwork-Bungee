@@ -24,7 +24,7 @@ public class C_Masa3MC extends Command {
 			if (args[0].equalsIgnoreCase("reload")) {
 				Conf.reload();
 				try {
-					Masa3MC.getMySQL().openConnection();
+					Masa3MC.getMySQL().dataUpdate();
 				} catch (ClassNotFoundException | SQLException e) {
 					sender.sendMessage(c("&cMySQLのロード時にエラーが発生しました。"));
 				}

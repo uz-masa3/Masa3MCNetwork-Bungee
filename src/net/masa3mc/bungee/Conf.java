@@ -8,8 +8,8 @@ public class Conf {
 	public static String CONNECT = c("&b[Connect]&e: &a%player%&7さんが参加しました");
 	public static String DISCONNECT = c("&b[Disconnect]&e: &a%player%&7さんが退出しました");
 	public static String SWITCH = c("&b[Switch]&e: &a%player%&7さんが&a%server%サーバー&7に移動しました");
-	public static String MOTD_OK = c("&6Masa3MCNetwork &b| &2初心者大歓迎！\n&eMinigames, Creative, Survival, PvP...");
-	public static String MOTD_BAD = c("&6Masa3MCNetwork &b| &2初心者大歓迎！\n&ePlay.masa3MCNetwork.comでお入りください");
+	public static String MOTD_OK = c("&6Masa3MCNetwork &b| &2初心者さんも大歓迎！\n&eMinigames, Creative, Survival, PvP");
+	
 	public static String MYSQL_HOST = "";
 	public static String MYSQL_USE_DB = "";
 	public static String MYSQL_USERNAME = "";
@@ -19,14 +19,13 @@ public class Conf {
 	public static String replace(String string, String player, String server) {
 		return string.replace("%player%", player).replace("%server%", server);
 	}
-
+	
 	public static void reload() {
 		Masa3MC.loadConfig();
 		CONNECT = c(conf().getString("message.CONNECT"));
 		DISCONNECT = c(conf().getString("message.DISCONNECT"));
 		SWITCH = c(conf().getString("message.SWITCH"));
 		MOTD_OK = c(conf().getString("message.MOTD_OK"));
-		MOTD_BAD = c(conf().getString("message.MOTD_BAD"));
 
 		MYSQL_HOST = conf().getString("mysql.host");
 		MYSQL_PORT = conf().getInt("mysql.port");

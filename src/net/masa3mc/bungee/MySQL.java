@@ -38,8 +38,9 @@ public class MySQL {
 		}
 	}
 
-	public void dataUpdate() throws SQLException {
+	public void dataUpdate() throws SQLException, ClassNotFoundException {
 		datamap.clear();
+		openConnection();
 		Statement statement = connection.createStatement();
 		statement.executeQuery("use " + database);
 
@@ -66,7 +67,7 @@ public class MySQL {
 	}
 
 	public double getPlayersMoney(UUID uuid) {
-		return datamap.getOrDefault(uuid, 0.0);
+		return datamap.getOrDefault(uuid, -1.0);
 	}
 
 }

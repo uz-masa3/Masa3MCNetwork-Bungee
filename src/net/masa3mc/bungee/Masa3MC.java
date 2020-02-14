@@ -32,7 +32,6 @@ public class Masa3MC extends Plugin {
 		getProxy().getPluginManager().registerCommand(this, new C_Masa3MC());
 		mysql = new MySQL();
 		try {
-			mysql.openConnection();
 			mysql.dataUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -42,7 +41,7 @@ public class Masa3MC extends Plugin {
 			public void run() {
 				try {
 					mysql.dataUpdate();
-				} catch (SQLException e) {
+				} catch (SQLException | ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}

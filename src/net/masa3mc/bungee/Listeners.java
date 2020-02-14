@@ -19,6 +19,7 @@ import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
 import net.md_5.bungee.api.event.ServerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.event.EventHandler;
 
 public class Listeners implements Listener {
@@ -39,38 +40,35 @@ public class Listeners implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onProxyPing(ProxyPingEvent event) {
-		for (ServerInfo server : bungee.getServers().values()) {
-			server_players.put(server.getName(), server.getPlayers().size());
-		}
-		PlayerInfo[] playerinfo = new PlayerInfo[] { new PlayerInfo(color("&7--------------------------"), "0"),
-				new PlayerInfo(color("&bWelcome to Masa3MCNetwork!"), "0"),
-				new PlayerInfo(color("&eVer&9: &e1.8 - 1.12.2"), "0"),
-				new PlayerInfo(color("&7--------------------------"), "0"), new PlayerInfo(color("&5Servers&9:"), "0"),
-				new PlayerInfo(color("&7  - Lobby(&6" + ps("Lobby") + "&7)"), "0"),
-				new PlayerInfo(color("&7  - Minigame(&6" + ps("Minigame") + "&7)"), "0"),
-				new PlayerInfo(color("&7  - Creative(&6" + ps("Creative") + "&7)"), "0"),
-				new PlayerInfo(color("&7  - Survival(&6" + ps("Survival") + "&7)"), "0"),
-				new PlayerInfo(color("&7  - PvP(&6" + ps("PvP") + "&7)"), "0"), };
-		ServerPing sp = event.getResponse();
-		String virtual = event.getConnection().getVirtualHost() + "".toLowerCase();
-		if (virtual.equalsIgnoreCase("play.masa3mcnetwork.com:25565")) {
+		try {
+			for (ServerInfo server : bungee.getServers().values()) {
+				server_players.put(server.getName(), server.getPlayers().size());
+			}
+			Configuration c = Masa3MC.getConfig();
+			ArrayList<PlayerInfo> aa = new ArrayList<>();
+			for (String strs : c.getStringList("MOTD.PlayerList")) {
+				strs = strs.replaceAll("%lobby%", "" + ps("Lobby")).replaceAll("%minigame%", "" + ps("Minigame"))
+						.replaceAll("%creative%", "" + ps("Creative")).replaceAll("%survival%", "" + ps("Survival"))
+						.replaceAll("%pvp%", "" + ps("PvP"));
+				aa.add(new PlayerInfo(color(strs), "0"));
+			}
+			PlayerInfo[] playerinfo = aa.toArray(new PlayerInfo[aa.size()]);
+			ServerPing sp = event.getResponse();
 			sp.setDescription(Conf.MOTD_OK);
-		} else if (virtual.equalsIgnoreCase("play.masa3mcnet.work:25565")) {
-			sp.setDescription(Conf.MOTD_OK);
-		} else {
-			sp.setDescription(Conf.MOTD_BAD);
+			sp.setPlayers(new Players(c.getInt("MOTD.maxplayers", 100), bungee.getOnlineCount(), playerinfo));
+			sp.getModinfo().setType(c.getString("MOTD.ModInfo"));
+			sp.setFavicon(bungee.config.getFaviconObject().getEncoded());
+			event.setResponse(sp);
+		} catch (Exception e) {
+
 		}
-		sp.setPlayers(new Players(100, bungee.getOnlineCount(), playerinfo));
-		sp.getModinfo().setType("VANILLA");
-		// sp.setFavicon(bungee.config.getFaviconObject().getEncoded());
-		event.setResponse(sp);
 	}
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void a(ServerConnectedEvent event) {
 		ProxiedPlayer player = event.getPlayer();
-		util.updateDelay(750, TimeUnit.MILLISECONDS);
+		util.updateDelay(1000, TimeUnit.MILLISECONDS);
 		if (login.contains(player.getName())) {
 			login.remove(player.getName());
 			for (ProxiedPlayer players : bungee.getPlayers()) {
@@ -88,11 +86,13 @@ public class Listeners implements Listener {
 	public void onConnect(ServerConnectEvent event) {
 		ProxiedPlayer player = event.getPlayer();
 		String target_ = event.getTarget().getName();
-		if (target_.equalsIgnoreCase("Survival") || target_.equalsIgnoreCase("Event")) {
-			if (player.getPendingConnection().getVersion() >= 340) {
+		Configuration c = Masa3MC.getConfig();
+		if (c.getBoolean("Version." + target_ + ".Enable")) {
+			if (player.getPendingConnection().getVersion() >= c.getInt("Version." + target_ + ".ProtocolVersion")) {
 				target.put(player.getName(), target_);
 			} else {
-				player.sendMessage(color("&c" + target_ + "サーバーには1.12.2以上でないと入れません"));
+				player.sendMessage(color(
+						"&c" + target_ + "サーバーには" + c.getString("Version." + target_ + ".Version") + "以上でないと入れません"));
 				event.setCancelled(true);
 			}
 		} else {
@@ -137,7 +137,7 @@ public class Listeners implements Listener {
 		}
 		int protocol = player.getPendingConnection().getVersion();
 		if (protocol < 47) {
-			player.disconnect(new Util().color("&c対応バージョンは1.8.8〜となっております。"));
+			player.disconnect(new Util().color("&c対応していないバージョンです。"));
 			return;
 		}
 		login.add(event.getPlayer().getName());

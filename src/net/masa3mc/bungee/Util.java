@@ -49,7 +49,7 @@ public class Util {
 
 	public static CountryJson getCountry(String ip) {
 		try {
-			URL url = new URL("http://freegeoip.net/json/" + ip);
+			URL url = new URL("https://ipapi.co/" + ip + "/json/");
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			http.setRequestMethod("GET");
 			http.setRequestProperty("User-Agent", "Masa3MCNetwork");
@@ -91,11 +91,12 @@ public class Util {
 				if (players.getServer() != null && players.getServer().getInfo() != null) {
 					srv = players.getServer().getInfo().getName();
 				}
-				double money = Masa3MC.getMySQL().getPlayersMoney(players.getUniqueId());
 				ScoreBoardUtils.removeObject(unique, disp, players);
-				if (srv.equalsIgnoreCase("pvp")) {
+				if (srv.equalsIgnoreCase("pvp") || srv.equalsIgnoreCase("null")
+						|| players.getPendingConnection().getVersion() >= 341) {// 1.12.2を超える
 					continue;
 				}
+				double money = Masa3MC.getMySQL().getPlayersMoney(players.getUniqueId());
 				ScoreBoardUtils.createObject(unique, disp, players);
 
 				ScoreBoardUtils.updateScore(color(" &6Server&b:"), unique, 12, players);
@@ -114,9 +115,11 @@ public class Util {
 				ScoreBoardUtils.updateScore(color(" &e" + money + "Ms"), unique, 2, players);
 				ScoreBoardUtils.updateScore(color("&b--------------"), unique, 0, players);
 
-				ScoreBoardUtils.getDisplay(1, unique, players);
+				ScoreBoardUtils.display(1, unique, players);
+
 			}
 		}
+
 	}
 
 	private String ping(ProxiedPlayer p) {
