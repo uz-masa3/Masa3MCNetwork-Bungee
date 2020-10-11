@@ -19,8 +19,6 @@ import net.md_5.bungee.config.YamlConfiguration;
 public class Masa3MC extends Plugin {
 
 	public static Masa3MC instance;
-	private static MySQL mysql;
-	private static boolean checkCountry = false;
 	private static Configuration configuration;
 
 	@Override
@@ -30,31 +28,6 @@ public class Masa3MC extends Plugin {
 		Conf.reload();
 		getProxy().getPluginManager().registerListener(this, new Listeners());
 		getProxy().getPluginManager().registerCommand(this, new C_Masa3MC());
-		mysql = new MySQL();
-		try {
-			mysql.dataUpdate();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		getProxy().getScheduler().schedule(this, new Runnable() {
-			@Override
-			public void run() {
-				try {
-					mysql.dataUpdate();
-				} catch (SQLException | ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-			}
-		}, 20, 10, TimeUnit.SECONDS);
-		new Util().updateRepeat(5, TimeUnit.SECONDS);
-	}
-
-	public static MySQL getMySQL() {
-		return mysql;
-	}
-
-	public static boolean isCheckCountry() {
-		return checkCountry;
 	}
 
 	public static Configuration getConfig() {

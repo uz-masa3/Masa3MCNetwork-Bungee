@@ -23,15 +23,10 @@ public class C_Masa3MC extends Command {
 		} else {
 			if (args[0].equalsIgnoreCase("reload")) {
 				Conf.reload();
-				try {
-					Masa3MC.getMySQL().dataUpdate();
-				} catch (ClassNotFoundException | SQLException e) {
-					sender.sendMessage(c("&cMySQLのロード時にエラーが発生しました。"));
-				}
-				sender.sendMessage(c("&a再読込が完了しました"));
+				sender.sendMessage(c("&7[Masa3MC] &a再読込が完了しました。"));
 			} else if (args[0].equalsIgnoreCase("force_configsave")) {
 				Masa3MC.saveDefaultConfig(true);
-				sender.sendMessage(c("&aConfigを強制的に初期状態に戻しました"));
+				sender.sendMessage(c("&7[Masa3MC] &aConfigを強制的に初期状態に戻しました。"));
 			} else {
 				sender.sendMessage(c("&c----------Masa3MC----------"));
 				sender.sendMessage(c("&7 - /gmasa3mc reload"));

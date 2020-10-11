@@ -4,14 +4,15 @@ MOTD:
   PlayerList:
     - "&7--------------------------"
     - "&bWelcome to Masa3MCNetwork!"
-    - "&eVer&9: &e1.8 - 1.14.4"
+    - "&eVer&9: &e1.8 - 1.16.3"
     - "&7--------------------------"
     - "&5Servers&9:"
     - "&7  - Lobby(&6%lobby%&7)"
-    - "&7  - Minigame(&6%minigame%&7)"
+#    - "&7  - Minigame(&6%minigame%&7)"
     - "&7  - Creative(&6%creative%&7)"
     - "&7  - Survival(&6%survival%&7)"
     - "&7  - PvP(&6%pvp%&7)"
+    - "&7  - Athletic(&6athletic%&7)"
 
 
 
@@ -19,33 +20,10 @@ message:
   CONNECT: "&b[Connect]: &a%player%&7さんが参加しました。"
   DISCONNECT: "&b[Connect]: &a%player%&7さんが退出しました。"
   SWITCH: "&b[Switch]: &a%server%サーバー&7に移動しました。"
-  MOTD_OK: "&6Masa3MCNetwork &b| &224時間あいてます\n&eMinigames, Creative, Survival, PvP..."
+  MOTD_OK: "&6Masa3MCNetwork &b| &224時間あいてます\n　　&3HP&c>> &emasa3mc.xyz"
 
 
-#ここに書いているバージョンより上でないと移動できないようにする機能
-#参考: https://wiki.vg/Protocol_version_numbers
-Version:
-  Minigame:
-    Enable: false
-    ProtocolVersion: 47
-    Version: "1.8.8"
-  Creative:
-    Enable: true
-    ProtocolVersion: 498
-    Version: "1.14.4"
-  Survival:
-    Enable: true
-    ProtocolVersion: 498
-    Version: "1.14.4"
-  PvP:
-    Enable: false
-    ProtocolVersion: 47
-    Version: "1.8.8"
+#はげたろうからのおねがい
+#新しくサーバーを追加したときは「src/net/masa3mc/bungee/Listener#onProxyPing()」を編集してください。
+#　　↑↑　　%lobby%や%creative%のような文字に新規サーバーを対応させることができます。
 
-
-mysql:
-  host: localhost
-  port: 3306
-  database: jecon_
-  username: masa3mcnetwork
-  password: Masa3MC_45779172_Masa3MC
