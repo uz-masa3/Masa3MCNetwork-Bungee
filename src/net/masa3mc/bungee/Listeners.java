@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.Favicon;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.ServerPing.PlayerInfo;
 import net.md_5.bungee.api.ServerPing.Players;
@@ -16,7 +17,6 @@ import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
-import net.md_5.bungee.api.event.ServerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.event.EventHandler;
@@ -24,9 +24,9 @@ import net.md_5.bungee.event.EventHandler;
 public class Listeners implements Listener {
 
     private final BungeeCord bungee = BungeeCord.getInstance();
-    private HashMap<String, Integer> server_players = new HashMap<>();
-    private HashMap<String, String> target = new HashMap<>();
-    private List<String> login = new ArrayList<>();
+    private final HashMap<String, Integer> server_players = new HashMap<>();
+    private final HashMap<String, String> target = new HashMap<>();
+    private final List<String> login = new ArrayList<>();
 
     @SuppressWarnings("deprecation")
     @EventHandler
@@ -45,12 +45,14 @@ public class Listeners implements Listener {
                 ;
                 aa.add(new PlayerInfo(color(strs), "0"));
             }
-            PlayerInfo[] playerinfo = aa.toArray(new PlayerInfo[aa.size()]);
+            //PlayerInfo[] playerinfo = aa.toArray(new PlayerInfo[aa.size()]);
+            PlayerInfo[] playerinfo = aa.toArray(new PlayerInfo[0]);
             ServerPing sp = event.getResponse();
             sp.setDescription(Conf.MOTD_OK);
             sp.setPlayers(new Players(c.getInt("MOTD.maxplayers", 100), bungee.getOnlineCount(), playerinfo));
             sp.getModinfo().setType(c.getString("MOTD.ModInfo"));
-            sp.setFavicon(bungee.config.getFaviconObject().getEncoded());
+            Favicon favicon = bungee.config.getFaviconObject();
+            if (favicon != null) sp.setFavicon(favicon.getEncoded());
             event.setResponse(sp);
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,14 +82,8 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onLogin(PostLoginEvent event) {
-        ProxiedPlayer player = event.getPlayer();
         login.add(event.getPlayer().getName());
-        bungee.getScheduler().schedule(Masa3MC.instance, new Runnable() {
-            @Override
-            public void run() {
-                login.remove(event.getPlayer().getName());
-            }
-        }, 4, TimeUnit.SECONDS);
+        bungee.getScheduler().schedule(Masa3MC.instance, () -> login.remove(event.getPlayer().getName()), 4, TimeUnit.SECONDS);
     }
 
     private int ps(String server) {

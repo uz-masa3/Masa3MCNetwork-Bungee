@@ -8,7 +8,7 @@ public class Conf {
 	public static String CONNECT = c("&b[Connect]&e: &a%player%&7さんが参加しました");
 	public static String DISCONNECT = c("&b[Disconnect]&e: &a%player%&7さんが退出しました");
 	public static String SWITCH = c("&b[Switch]&e: &a%player%&7さんが&a%server%サーバー&7に移動しました");
-	public static String MOTD_OK = c("&6Masa3MCNetwork &b| &224時間あいてます\\n　　&3HP&c>> &emasa3mc.xyz");
+	public static String MOTD_OK = c("&6Masa3MCNetwork &b| &224時間あいてます\\n    &r&eHP&c&l>> &emasa3mc.xyz");
 
 	public static String replace(String string, String player, String server) {
 		return string.replace("%player%", player).replace("%server%", server);
