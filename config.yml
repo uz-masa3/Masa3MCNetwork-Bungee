@@ -2,17 +2,25 @@ MOTD:
   ModInfo: "VANILLA"
   maxplayers: 100
   PlayerList:
-    - "&7--------------------------"
-    - "&bWelcome to Masa3MCNetwork!"
-    - "&eVer&9: &e1.8 - 1.16.3"
-    - "&7--------------------------"
-    - "&5Servers&9:"
-    - "&7  - Lobby(&6%lobby%&7)"
-#    - "&7  - Minigame(&6%minigame%&7)"
-    - "&7  - Creative(&6%creative%&7)"
-    - "&7  - Survival(&6%survival%&7)"
-    - "&7  - PvP(&6%pvp%&7)"
-    - "&7  - Athletic(&6athletic%&7)"
+    - "&7----------------------"
+    - "&6Masa3MCNetworkへようこそ！"
+    - "&6Ver&9: &61.8 - 1.16.3"
+    - "&7----------------------"
+    - "&6Servers&7:"
+    - "&7  ・ Lobby    -> &6%lobby%人"
+    #    - "&7  ・ Minigame -> &6%minigame%人"
+    - "&7  ・ Creative -> &6%creative%人"
+    - "&7  ・ Survival -> &6%survival%人"
+    - "&7  ・ PvP       -> &6%pvp%人"
+    - "&7  ・ Athletic  -> &6%athletic%人"
+    - "&7----------------------"
+    - "  &8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&r  &6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■"
+    - "  &8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&r  &6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■"
+    - "  &8&l&n■&8&l&n■&6&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&8&l&n■&r  &6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■"
+    - "  &8&l&n■&f&l&n■&4&l&n■&6&l&n■&8&l&n■&4&l&n■&f&l&n■&8&l&n■&r  &6&l&n■&f&l&n■&4&l&n■&6&l&n■&6&l&n■&4&l&n■&f&l&n■&6&l&n■"
+    - "  &8&l&n■&f&l&n■&4&l&n■&6&l&n■&6&l&n■&4&l&n■&f&l&n■&8&l&n■&r  &6&l&n■&f&l&n■&4&l&n■&6&l&n■&6&l&n■&4&l&n■&f&l&n■&6&l&n■"
+    - "  &d&l&n■&d&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&d&l&n■&d&l&n■&r  &d&l&n■&d&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&d&l&n■&d&l&n■"
+    - "  &6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&r  &6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■&6&l&n■"
 
 
 
@@ -20,7 +28,7 @@ message:
   CONNECT: "&b[Connect]: &a%player%&7さんが参加しました。"
   DISCONNECT: "&b[Connect]: &a%player%&7さんが退出しました。"
   SWITCH: "&b[Switch]: &a%server%サーバー&7に移動しました。"
-  MOTD_OK: "&6Masa3MCNetwork &b| &224時間あいてます\n　　&3HP&c>> &emasa3mc.xyz"
+  MOTD_OK: "&6Masa3MCNetwork &b| &224時間あいてます\n    &r&eHP&c&l>> &emasa3mc.xyz"
 
 
 #はげたろうからのおねがい
