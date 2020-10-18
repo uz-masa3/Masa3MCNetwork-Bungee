@@ -20,6 +20,7 @@ public class C_Masa3MC extends Command {
 			sender.sendMessage(c("&c----------Masa3MC----------"));
 			sender.sendMessage(c("&7 - /gmasa3mc reload"));
 			sender.sendMessage(c("&7 - /gmasa3mc force_configsave"));
+			sender.sendMessage(c("&c " + Masa3MC.instance.getDescription().getVersion()));
 		} else {
 			if (args[0].equalsIgnoreCase("reload")) {
 				Conf.reload();
