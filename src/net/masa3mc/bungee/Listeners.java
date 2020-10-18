@@ -13,10 +13,7 @@ import net.md_5.bungee.api.ServerPing.PlayerInfo;
 import net.md_5.bungee.api.ServerPing.Players;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.PostLoginEvent;
-import net.md_5.bungee.api.event.ProxyPingEvent;
-import net.md_5.bungee.api.event.ServerConnectEvent;
-import net.md_5.bungee.api.event.ServerConnectedEvent;
+import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.event.EventHandler;
@@ -66,10 +63,12 @@ public class Listeners implements Listener {
         if (login.contains(player.getName())) {
             login.remove(player.getName());
             for (ProxiedPlayer players : bungee.getPlayers()) {
-                players.sendMessage(Conf.replace(Conf.CONNECT, player.getName(), ""));
+                Masa3MC.instance.getProxy().getLogger().info(Conf.replace(Conf.CONNECT, player.getName(), "はげたろう"));
+                players.sendMessage(Conf.replace(Conf.CONNECT, player.getName(), "はげたろう"));
             }
         } else {
             for (ProxiedPlayer players : bungee.getPlayers()) {
+                Masa3MC.instance.getProxy().getLogger().info(Conf.replace(Conf.SWITCH, player.getName(), target.get(player.getName())));
                 players.sendMessage(Conf.replace(Conf.SWITCH, player.getName(), target.get(player.getName())));
             }
         }
@@ -84,6 +83,16 @@ public class Listeners implements Listener {
     public void onLogin(PostLoginEvent event) {
         login.add(event.getPlayer().getName());
         bungee.getScheduler().schedule(Masa3MC.instance, () -> login.remove(event.getPlayer().getName()), 4, TimeUnit.SECONDS);
+    }
+
+
+    @EventHandler
+    public void onDisconnect(PlayerDisconnectEvent event) {
+        ProxiedPlayer player = event.getPlayer();
+        Masa3MC.instance.getProxy().getLogger().info(Conf.replace(Conf.DISCONNECT, player.getName(), "はげたろう"));
+        for (ProxiedPlayer players : bungee.getPlayers()) {
+            players.sendMessage(Conf.replace(Conf.DISCONNECT, player.getName(), "はげたろう"));
+        }
     }
 
     private int ps(String server) {

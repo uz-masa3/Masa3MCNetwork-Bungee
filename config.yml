@@ -25,9 +25,9 @@ MOTD:
 
 
 message:
-  CONNECT: "&b[Connect]: &a%player%&7さんが参加しました。"
-  DISCONNECT: "&b[Connect]: &a%player%&7さんが退出しました。"
-  SWITCH: "&b[Switch]: &a%server%サーバー&7に移動しました。"
+  CONNECT: "&b[接続]: &a%player%&7さんが参加しました。"
+  DISCONNECT: "&b[退出]: &a%player%&7さんが退出しました。"
+  SWITCH: "&b[移動]&e: &a%player%&7さんが&a%server%サーバー&7に移動しました"
   MOTD_OK: "&6Masa3MCNetwork &b| &224時間あいてます\n    &r&eHP&c&l>> &emasa3mc.xyz"
 
 
